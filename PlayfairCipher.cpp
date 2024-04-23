@@ -45,11 +45,12 @@ void matrixFormation(string key)
         if (pointer[key[i] - 'A'] == 0) // If the character has not been used yet
         {
             pointer[key[i] - 'A'] = 1; // Mark it as used
-            matrix[i / 5][i % 5] = key[i]; // Add it to the matrix
-            charToIndex[key[i]] = {i / 5, i % 5}; // Store its index
+             matrix[len / 5][len % 5] = key[i]; // Add it to the matrix
+            charToIndex[key[i]] = {len / 5, len % 5}; // Store its index
+            len++;
         }
     }
-    int len = key.size(); // Length of the key
+    int len = key.size(), len = 0; // Length of the key
 
     // Fill the rest of the matrix with the remaining letters
     for (char i = 'A'; i <= 'Z'; i++)
@@ -139,12 +140,11 @@ string Decrypet(string str)
 // Main function
 int main()
 {
-    while (1) // Infinite loop
-    {
+    
         string key, plaintext; // Declare the key and plaintext
 
         cout << "Enter the key: "; // Prompt the user to enter the key
-        cin >> key; // Read the key
+        getline(cin, key); // Read the key
 
         cin.ignore(); // Ignore the newline character
 
@@ -208,5 +208,5 @@ int main()
         string decryptedText = Decrypet(cypherText);
 
         cout << "Decrypted Text: " << decryptedText << endl << endl; // Print the decrypted text
-    }
+    
     return 0; // End the program
