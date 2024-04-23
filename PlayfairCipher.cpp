@@ -1,18 +1,18 @@
 // Playfair Cipher
 
-#include <bits/stdc++.h> 
-using namespace std; 
+#include <bits/stdc++.h>
+using namespace std;
 
-char matrix[5][5]; // Declare a 5x5 matrix
+char matrix[5][5];                     // Declare a 5x5 matrix
 map<char, pair<int, int>> charToIndex; // Map to store character indices
 
 // Function to remove spaces from a string
 string removeSpaces(string str)
 {
-    string temp; // Temporary string to store result
+    string temp;                         // Temporary string to store result
     for (int i = 0; i < str.size(); i++) // Loop through the string
     {
-        if (str[i] != ' ') // If the character is not a space
+        if (str[i] != ' ')  // If the character is not a space
             temp += str[i]; // Add it to the temporary string
     }
     return temp; // Return the temporary string
@@ -21,11 +21,11 @@ string removeSpaces(string str)
 // Function to convert a string to uppercase
 string makeUppercase(string str)
 {
-    string temp; // Temporary string to store result
+    string temp;                         // Temporary string to store result
     for (int i = 0; i < str.size(); i++) // Loop through the string
     {
         if (str[i] >= 'a' && str[i] <= 'z') // If the character is lowercase
-            temp += char(str[i] - 32); // Convert it to uppercase and add it to the temporary string
+            temp += char(str[i] - 32);      // Convert it to uppercase and add it to the temporary string
         else
             temp += str[i]; // If it's not lowercase, just add it to the temporary string
     }
@@ -35,22 +35,21 @@ string makeUppercase(string str)
 // Function to form the matrix used in the Playfair cipher
 void matrixFormation(string key)
 {
-    int pointer[26] = {0}; // Array to keep track of which letters have been used
+    int pointer[26] = {0}, len = 0; // Array to keep track of which letters have been used
 
     // Fill the matrix with the key
     for (int i = 0; i < key.size(); i++)
     {
-        if (key[i] == 'J') // If the character is 'J'
-            key[i] = 'I'; // Replace it with 'I'
+        if (key[i] == 'J')              // If the character is 'J'
+            key[i] = 'I';               // Replace it with 'I'
         if (pointer[key[i] - 'A'] == 0) // If the character has not been used yet
         {
-            pointer[key[i] - 'A'] = 1; // Mark it as used
-             matrix[len / 5][len % 5] = key[i]; // Add it to the matrix
+            pointer[key[i] - 'A'] = 1;                // Mark it as used
+            matrix[len / 5][len % 5] = key[i];        // Add it to the matrix
             charToIndex[key[i]] = {len / 5, len % 5}; // Store its index
             len++;
         }
     }
-    int len = key.size(), len = 0; // Length of the key
 
     // Fill the rest of the matrix with the remaining letters
     for (char i = 'A'; i <= 'Z'; i++)
@@ -59,10 +58,10 @@ void matrixFormation(string key)
             continue;
         if (pointer[i - 'A'] == 0) // If the character has not been used yet
         {
-            pointer[i - 'A'] = 1; // Mark it as used
-            matrix[len / 5][len % 5] = i; // Add it to the matrix
+            pointer[i - 'A'] = 1;                // Mark it as used
+            matrix[len / 5][len % 5] = i;        // Add it to the matrix
             charToIndex[i] = {len / 5, len % 5}; // Store its index
-            len++; // Increase the length
+            len++;                               // Increase the length
         }
     }
 
@@ -80,12 +79,12 @@ void matrixFormation(string key)
 // Function to encrypt a string using the Playfair cipher
 string Encrypt(string str)
 {
-    string temp; // Temporary string to store the result
+    string temp;                            // Temporary string to store the result
     for (int i = 0; i < str.size(); i += 2) // Loop through the string two characters at a time
     {
-        int row1 = charToIndex[str[i]].first; // Get the row of the first character
-        int col1 = charToIndex[str[i]].second; // Get the column of the first character
-        int row2 = charToIndex[str[i + 1]].first; // Get the row of the second character
+        int row1 = charToIndex[str[i]].first;      // Get the row of the first character
+        int col1 = charToIndex[str[i]].second;     // Get the column of the first character
+        int row2 = charToIndex[str[i + 1]].first;  // Get the row of the second character
         int col2 = charToIndex[str[i + 1]].second; // Get the column of the second character
 
         if (row1 == row2) // If the characters are in the same row
@@ -110,12 +109,12 @@ string Encrypt(string str)
 // Function to decrypt a string using the Playfair cipher
 string Decrypet(string str)
 {
-    string temp; // Temporary string to store the result
+    string temp;                            // Temporary string to store the result
     for (int i = 0; i < str.size(); i += 2) // Loop through the string two characters at a time
     {
-        int row1 = charToIndex[str[i]].first; // Get the row of the first character
-        int col1 = charToIndex[str[i]].second; // Get the column of the first character
-        int row2 = charToIndex[str[i + 1]].first; // Get the row of the second character
+        int row1 = charToIndex[str[i]].first;      // Get the row of the first character
+        int col1 = charToIndex[str[i]].second;     // Get the column of the first character
+        int row2 = charToIndex[str[i + 1]].first;  // Get the row of the second character
         int col2 = charToIndex[str[i + 1]].second; // Get the column of the second character
 
         if (row1 == row2) // If the characters are in the same row
@@ -140,73 +139,73 @@ string Decrypet(string str)
 // Main function
 int main()
 {
-    
-        string key, plaintext; // Declare the key and plaintext
 
-        cout << "Enter the key: "; // Prompt the user to enter the key
-        getline(cin, key); // Read the key
+    string key, plaintext; // Declare the key and plaintext
 
-        cin.ignore(); // Ignore the newline character
+    cout << "Enter the key: "; // Prompt the user to enter the key
+    getline(cin, key);         // Read the key
 
-        cout << "Enter the plaintext: "; // Prompt the user to enter the plaintext
-        getline(cin, plaintext); // Read the plaintext
+    cout << "Enter the plaintext: "; // Prompt the user to enter the plaintext
+    getline(cin, plaintext);         // Read the plaintext
 
-        // Remove spaces from the plaintext
-        plaintext = removeSpaces(plaintext);
+    // Remove spaces from the plaintext
+    plaintext = removeSpaces(plaintext);
 
-        // Make uppercase
-        plaintext = makeUppercase(plaintext);
-        key = makeUppercase(key);
+    // Make uppercase
+    plaintext = makeUppercase(plaintext);
+    key = makeUppercase(key);
 
-        // Replace 'J' with 'I' in the key
-        for (int i = 0; i < key.size(); i++)
+    // Replace 'J' with 'I' in the key
+    for (int i = 0; i < key.size(); i++)
+    {
+        if (key[i] == 'J')
+            key[i] = 'I';
+    }
+
+    // Handle duplicate characters in the plaintext
+    for (int i = 0; i < plaintext.size(); i += 2)
+    {
+        if (plaintext[i] == plaintext[i + 1] && plaintext[i] == 'X')
         {
-            if (key[i] == 'J')
-                key[i] = 'I';
+            plaintext.insert(i + 1, "Y");
         }
-
-        // Handle duplicate characters in the plaintext
-        for (int i = 0; i < plaintext.size(); i += 2)
+        else if (plaintext[i] == plaintext[i + 1])
         {
-            if (plaintext[i] == plaintext[i + 1] && plaintext[i] == 'X')
-            {
-                plaintext.insert(i + 1, "Y");
-            }
-            else if (plaintext[i] == plaintext[i + 1])
-            {
-                plaintext.insert(i + 1, "X");
-            }
+            plaintext.insert(i + 1, "X");
         }
+    }
 
-        // Padding
-        if (plaintext.size() % 2 != 0 && plaintext[plaintext.size() - 1] == 'X')
-            plaintext += 'Y';
-        if (plaintext.size() % 2 != 0)
-            plaintext += 'X';
+    // Padding
+    if (plaintext.size() % 2 != 0 && plaintext[plaintext.size() - 1] == 'X')
+        plaintext += 'Y';
+    if (plaintext.size() % 2 != 0)
+        plaintext += 'X';
 
-        cout << "Plaintext after handle duplicate and padding: ";
-        
-        // Print the plaintext after handling duplicates and padding
-        for (int i = 0; i < plaintext.size(); i++)
-        {
-            cout << plaintext[i]; // Print each character
-            if (i % 2)
-                cout << " "; // Print a space after every second character
-        }
+    cout << "Plaintext after handle duplicate and padding: ";
 
-        cout << endl; // Print a newline
+    // Print the plaintext after handling duplicates and padding
+    for (int i = 0; i < plaintext.size(); i++)
+    {
+        cout << plaintext[i]; // Print each character
+        if (i % 2)
+            cout << " "; // Print a space after every second character
+    }
 
-        // Matrix formation
-        matrixFormation(key);
+    cout << endl; // Print a newline
 
-        // Encrypt the plaintext
-        string cypherText = Encrypt(plaintext);
+    // Matrix formation
+    matrixFormation(key);
 
-        cout << "CypherText: " << cypherText << endl; // Print the ciphertext
+    // Encrypt the plaintext
+    string cypherText = Encrypt(plaintext);
 
-        // Decrypt the ciphertext
-        string decryptedText = Decrypet(cypherText);
+    cout << "CypherText: " << cypherText << endl; // Print the ciphertext
 
-        cout << "Decrypted Text: " << decryptedText << endl << endl; // Print the decrypted text
-    
+    // Decrypt the ciphertext
+    string decryptedText = Decrypet(cypherText);
+
+    cout << "Decrypted Text: " << decryptedText << endl
+         << endl; // Print the decrypted text
+
     return 0; // End the program
+}
