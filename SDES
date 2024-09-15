@@ -7,7 +7,7 @@ int ep[100];
 int ss0[10][10];
 int ss1[10][10];
 int p4[100];
-// Md Sha Alam Bulbul
+
 string shift(string s,int a)
 {
    int i,j;
